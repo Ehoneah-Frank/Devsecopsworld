@@ -12,7 +12,7 @@ const Footer = () => {
           {/* Branding & Socials */}
           <div>
             <Link to="/" className="text-2xl font-bold tracking-tight text-gray-900">
-              DevOps<span className="text-primary">Hub</span>
+            Devsecopsworld<span className="text-primary">-community</span>
             </Link>
             <p className="mt-4 text-sm">
               Bridging Development and Operations for Seamless Delivery.
@@ -105,7 +105,7 @@ const Footer = () => {
                 className="flex items-center space-x-2 text-sm hover:text-primary transition-colors"
               >
                 <Mail size={18} />
-                <span>info@devopshub.com</span>
+                <span>lorem@gmail.com</span>
               </a>
             </div>
           </div>
@@ -114,7 +114,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-200 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-xs">
-            &copy; {new Date().getFullYear()} DevOpsHub. All rights reserved.
+            &copy; {new Date().getFullYear()} Devsecopsworld-community. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link 
