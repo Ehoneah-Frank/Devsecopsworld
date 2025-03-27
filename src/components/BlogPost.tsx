@@ -1,9 +1,10 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Clock, BookOpen, Tag } from "lucide-react";
+import { Clock, BookOpen, User, Calendar, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { type BlogPost } from "@/lib/data";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 
 interface BlogPostCardProps {
   post: BlogPost;
@@ -19,23 +20,23 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({
   style
 }) => {
   const categoryColors = {
-    ci: "bg-blue-50 text-blue-600 border-blue-200",
-    cd: "bg-green-50 text-green-600 border-green-200",
-    automation: "bg-purple-50 text-purple-600 border-purple-200",
-    culture: "bg-amber-50 text-amber-600 border-amber-200",
-    tools: "bg-cyan-50 text-cyan-600 border-cyan-200"
+    ci: "bg-blue-100 text-blue-700",
+    cd: "bg-green-100 text-green-700",
+    automation: "bg-purple-100 text-purple-700",
+    culture: "bg-amber-100 text-amber-700",
+    tools: "bg-cyan-100 text-cyan-700"
   };
 
   if (featured) {
     return (
-      <div 
+      <Card 
         className={cn(
-          "group grid grid-cols-1 md:grid-cols-5 gap-6 bg-white rounded-xl border overflow-hidden hover:shadow-lg transition-all duration-300 hover:border-primary/20",
+          "group grid grid-cols-1 md:grid-cols-5 gap-6 overflow-hidden hover:shadow-lg transition-all duration-300",
           className
         )}
         style={style}
       >
-        <div className="overflow-hidden h-full md:col-span-2">
+        <div className="overflow-hidden h-full rounded-l-lg md:col-span-2">
           <img 
             src={post.image} 
             alt={post.title} 
@@ -45,8 +46,8 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({
         
         <div className="p-6 flex flex-col md:col-span-3">
           <div className="mb-4">
-            <div className="flex items-center gap-2 mb-3">
-              <span className={cn("text-xs px-3 py-1 rounded-full border", categoryColors[post.category])}>
+            <div className="flex items-center gap-3 mb-3">
+              <span className={cn("text-xs font-medium px-3 py-1 rounded-full", categoryColors[post.category])}>
                 {post.category === "ci" ? "CI" : post.category === "cd" ? "CD" : 
                   post.category.charAt(0).toUpperCase() + post.category.slice(1)}
               </span>
@@ -89,82 +90,73 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({
             </div>
           </div>
         </div>
-      </div>
+      </Card>
     );
   }
 
   return (
-    <div 
+    <Card
       className={cn(
-        "group flex flex-col bg-white rounded-xl border overflow-hidden hover:shadow-md transition-all duration-300 hover:border-primary/20 h-full",
+        "group flex flex-col overflow-hidden hover:shadow-md transition-all duration-300 h-full border-t-4 border-t-primary",
         className
       )}
       style={style}
     >
-      <div className="relative overflow-hidden h-48">
+      <div className="relative h-48 overflow-hidden">
         <img 
           src={post.image} 
           alt={post.title} 
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-        <div className="absolute bottom-3 left-3 right-3 flex justify-between items-center">
-          <span className={cn("text-xs px-3 py-1 rounded-full border", categoryColors[post.category])}>
+        <div className="absolute top-3 left-3">
+          <span className={cn("text-xs font-medium px-3 py-1 rounded-full", categoryColors[post.category])}>
             {post.category === "ci" ? "CI" : post.category === "cd" ? "CD" : 
               post.category.charAt(0).toUpperCase() + post.category.slice(1)}
-          </span>
-          <span className="text-xs text-white flex items-center bg-black/30 px-2 py-1 rounded-full">
-            <Clock size={12} className="mr-1" />
-            {post.readTime}
           </span>
         </div>
       </div>
       
-      <div className="flex-1 p-5">
-        <h3 className="font-heading font-semibold text-lg mb-3 group-hover:text-primary transition-colors">
+      <CardHeader className="p-5 pb-0">
+        <div className="flex items-center justify-between mb-2 text-xs text-muted-foreground">
+          <div className="flex items-center">
+            <Calendar size={14} className="mr-1" />
+            <span>{post.date}</span>
+          </div>
+          <div className="flex items-center">
+            <Clock size={14} className="mr-1" />
+            <span>{post.readTime}</span>
+          </div>
+        </div>
+        <h3 className="font-heading font-semibold text-lg group-hover:text-primary transition-colors">
           {post.title}
         </h3>
-        
-        <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+      </CardHeader>
+      
+      <CardContent className="p-5 flex-1">
+        <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
           {post.excerpt}
         </p>
-        
-        <div className="flex items-center mb-4 mt-auto pt-2">
+      </CardContent>
+      
+      <CardFooter className="p-5 pt-0 flex items-center justify-between border-t mt-auto">
+        <div className="flex items-center">
           <img 
             src={post.author.avatar} 
             alt={post.author.name} 
             className="w-8 h-8 rounded-full mr-2 border border-white shadow-sm"
           />
-          <div>
-            <span className="text-xs font-medium block">{post.author.name}</span>
-            <span className="text-xs text-muted-foreground">{post.date}</span>
-          </div>
+          <span className="text-xs font-medium">{post.author.name}</span>
         </div>
         
-        <div className="flex justify-between items-center pt-2 border-t">
-          <div className="flex items-center text-xs text-muted-foreground">
-            <Tag size={12} className="mr-1" />
-            <span>Ghana Tech</span>
-          </div>
-          
-          <Link
-            to={`/blog/${post.id}`}
-            className="inline-flex items-center text-xs font-medium text-primary hover:underline"
-          >
-            Read more
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="h-3 w-3 ml-1 transition-transform group-hover:translate-x-0.5" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
-        </div>
-      </div>
-    </div>
+        <Link
+          to={`/blog/${post.id}`}
+          className="inline-flex items-center text-xs font-medium text-primary hover:underline"
+        >
+          Read more
+          <ArrowRight size={14} className="ml-1" />
+        </Link>
+      </CardFooter>
+    </Card>
   );
 };
 
