@@ -1,4 +1,3 @@
-
 import { CalendarDays, Code, Database, GitBranch, Server } from "lucide-react";
 
 export interface Event {
@@ -10,6 +9,7 @@ export interface Event {
   description: string;
   image: string;
   category: "webinar" | "workshop" | "conference";
+  attendees?: string | number;
 }
 
 export interface BlogPost {
@@ -49,7 +49,8 @@ export const events: Event[] = [
     location: "Virtual",
     description: "Learn essential Kubernetes patterns and practices from industry experts in this hands-on workshop. Topics include resource management, security, and scaling.",
     image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80",
-    category: "workshop"
+    category: "workshop",
+    attendees: 45
   },
   {
     id: "2",
@@ -59,7 +60,8 @@ export const events: Event[] = [
     location: "San Francisco, CA",
     description: "A three-day conference featuring keynote speakers, panel discussions, and networking opportunities focused on organizational DevOps transformation.",
     image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
-    category: "conference"
+    category: "conference",
+    attendees: 120
   },
   {
     id: "3",
@@ -69,7 +71,8 @@ export const events: Event[] = [
     location: "Virtual",
     description: "Discover strategies to improve your continuous integration and delivery pipelines, reduce build times, and enhance reliability.",
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80",
-    category: "webinar"
+    category: "webinar",
+    attendees: 78
   },
   {
     id: "4",
@@ -79,7 +82,8 @@ export const events: Event[] = [
     location: "Virtual",
     description: "Master the art of infrastructure as code using Terraform, CloudFormation, and Pulumi in this comprehensive workshop.",
     image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=800&q=80",
-    category: "workshop"
+    category: "workshop",
+    attendees: 35
   }
 ];
 
