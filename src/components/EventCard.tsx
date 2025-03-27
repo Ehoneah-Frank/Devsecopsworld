@@ -1,10 +1,10 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Calendar, Clock, MapPin, Users, ChevronRight } from "lucide-react";
+import { Calendar, Clock, MapPin, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { type Event } from "@/lib/data";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 interface EventCardProps {
   event: Event;
@@ -13,78 +13,73 @@ interface EventCardProps {
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event, className, style }) => {
-  const categoryColors = {
-    webinar: "bg-devscops-teal/10 text-devscops-teal border border-devscops-teal/30",
-    workshop: "bg-devscops-yellow/10 text-devscops-yellow border border-devscops-yellow/30",
-    conference: "bg-devscops-purple/10 text-devscops-purple border border-devscops-purple/30"
+  const categoryColors: Record<string, string> = {
+    webinar: "bg-blue-100 text-blue-700",
+    workshop: "bg-amber-100 text-amber-700",
+    conference: "bg-purple-100 text-purple-700"
   };
 
   return (
     <Card 
       className={cn(
-        "group overflow-hidden transition-all duration-300 hover:shadow-lg border-l-4 border-l-devscops-purple dark:bg-card dark-transition",
+        "overflow-hidden transition-all duration-300 hover:shadow-md h-full card-hover",
         className
       )}
       style={style}
     >
-      <div className="relative h-44 overflow-hidden">
+      <div className="relative aspect-video overflow-hidden">
         <img 
           src={event.image} 
           alt={event.title} 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+        <div className="absolute top-2 left-2">
+          <span className={cn("text-xs font-semibold px-2.5 py-1 rounded-full", categoryColors[event.category])}>
+            {event.category.charAt(0).toUpperCase() + event.category.slice(1)}
+          </span>
+        </div>
         
-        <div className="absolute bottom-0 left-0 right-0 p-4">
-          <div className="flex justify-between items-center">
-            <span className={cn("text-xs px-3 py-1.5 rounded-full", categoryColors[event.category])}>
-              {event.category.charAt(0).toUpperCase() + event.category.slice(1)}
-            </span>
-            
-            <div className="flex items-center space-x-2 text-white text-xs bg-black/40 px-2 py-1 rounded-full">
-              <Users size={14} />
-              <span>{event.attendees || "25+"}</span>
-            </div>
+        <div className="absolute bottom-2 right-2">
+          <div className="flex items-center bg-black/60 text-white text-xs px-2 py-1 rounded-full">
+            <Users size={12} className="mr-1" />
+            <span>{event.attendees || "25+"}</span>
           </div>
         </div>
       </div>
       
-      <CardHeader className="p-4 pb-0">
-        <h3 className="font-heading font-semibold text-xl group-hover:text-devscops-yellow transition-colors">
+      <CardContent className="p-4">
+        <h3 className="font-semibold text-lg mb-2 line-clamp-2">
           {event.title}
         </h3>
-      </CardHeader>
-      
-      <CardContent className="p-4 space-y-3">
-        <div className="flex flex-col space-y-2 border-l-2 border-devscops-purple/20 pl-3">
-          <div className="flex items-center text-sm">
-            <Calendar size={16} className="mr-2 text-devscops-teal" />
-            <span className="font-medium">{event.date}</span>
+        
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
+          {event.description}
+        </p>
+        
+        <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+          <div className="flex items-center">
+            <Calendar size={14} className="mr-2 text-devscops-teal" />
+            <span>{event.date}</span>
           </div>
           
-          <div className="flex items-center text-sm">
-            <Clock size={16} className="mr-2 text-devscops-teal" />
+          <div className="flex items-center">
+            <Clock size={14} className="mr-2 text-devscops-teal" />
             <span>{event.time}</span>
           </div>
           
-          <div className="flex items-center text-sm">
-            <MapPin size={16} className="mr-2 text-devscops-teal" />
+          <div className="flex items-center">
+            <MapPin size={14} className="mr-2 text-devscops-teal" />
             <span>{event.location}</span>
           </div>
         </div>
-        
-        <p className="text-sm text-muted-foreground line-clamp-2 pt-2">
-          {event.description}
-        </p>
       </CardContent>
       
-      <CardFooter className="p-4 pt-0">
+      <CardFooter className="px-4 pb-4 pt-0">
         <Link
           to={`/events/${event.id}`}
-          className="w-full inline-flex items-center justify-center bg-devscops-red hover:bg-devscops-red/90 text-white rounded-md p-2 text-sm font-medium transition-colors"
+          className="w-full inline-flex items-center justify-center bg-devscops-red hover:bg-devscops-red/90 text-white rounded-md py-2 px-4 text-sm font-medium transition-colors"
         >
           Register Now
-          <ChevronRight size={16} className="ml-1" />
         </Link>
       </CardFooter>
     </Card>

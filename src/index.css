@@ -6,22 +6,22 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 277 43% 25%;
+    --foreground: 260 17% 37%;
 
     --card: 0 0% 100%;
-    --card-foreground: 277 43% 25%;
+    --card-foreground: 260 17% 37%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 277 43% 25%;
+    --popover-foreground: 260 17% 37%;
 
-    --primary: 277 43% 37%;
+    --primary: 260 17% 37%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 185 80% 34%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 42 93% 59%;
-    --muted-foreground: 277 43% 25%;
+    --muted-foreground: 260 17% 37%;
 
     --accent: 0 54% 58%;
     --accent-foreground: 0 0% 100%;
@@ -29,30 +29,30 @@
     --destructive: 0 54% 58%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 42 93% 85%;
-    --input: 0 0% 89.8%;
-    --ring: 277 43% 37%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 260 17% 37%;
 
     --radius: 0.75rem;
   }
 
   .dark {
-    --background: 277 43% 10%;
+    --background: 260 17% 5%;
     --foreground: 0 0% 98%;
 
-    --card: 277 43% 8%;
+    --card: 260 17% 7%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 277 43% 8%;
+    --popover: 260 17% 7%;
     --popover-foreground: 0 0% 98%;
 
     --primary: 42 93% 59%;
-    --primary-foreground: 277 43% 25%;
+    --primary-foreground: 260 17% 37%;
 
     --secondary: 185 80% 34%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 277 43% 15%;
+    --muted: 260 17% 15%;
     --muted-foreground: 0 0% 80%;
 
     --accent: 0 54% 58%;
@@ -61,8 +61,8 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 277 43% 20%;
-    --input: 277 43% 20%;
+    --border: 260 17% 20%;
+    --input: 260 17% 20%;
     --ring: 42 93% 59%;
   }
 
@@ -80,53 +80,38 @@
     @apply font-heading tracking-tight;
   }
 
-  .page-transition {
-    @apply transition-all duration-500 ease-in-out;
-  }
-
-  .chip {
-    @apply inline-block px-2.5 py-0.5 text-xs font-medium rounded-full bg-secondary/80 text-white shadow-sm;
-  }
-
-  /* Glass card effect */
+  /* Modern UI Classes */
   .glass-card {
-    @apply backdrop-blur-md bg-white/80 dark:bg-devscops-purple/80 border border-white/20 dark:border-white/10 shadow-lg;
+    @apply backdrop-blur-md bg-white/80 dark:bg-black/20 border border-white/20 shadow-lg rounded-xl;
   }
   
-  /* Modern button styles */
   .btn-modern {
-    @apply relative overflow-hidden transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg active:translate-y-0 active:shadow-md;
+    @apply relative overflow-hidden rounded-lg transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg;
   }
   
-  /* Gradient text */
   .gradient-text {
     @apply bg-gradient-to-r from-devscops-purple to-devscops-teal bg-clip-text text-transparent;
   }
   
-  /* Dark mode transition for all elements */
   .dark-transition {
     @apply transition-all duration-300 ease-in-out;
   }
-}
-
-/* Smooth page transitions */
-.page-enter {
-  opacity: 0;
-  transform: translateY(8px);
-}
-.page-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 400ms, transform 400ms;
-}
-.page-exit {
-  opacity: 1;
-  transform: translateY(0);
-}
-.page-exit-active {
-  opacity: 0;
-  transform: translateY(-8px);
-  transition: opacity 400ms, transform 400ms;
+  
+  .section {
+    @apply py-16 px-4 md:py-20 md:px-6 lg:px-8 max-w-7xl mx-auto;
+  }
+  
+  .heading-xl {
+    @apply text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight;
+  }
+  
+  .heading-lg {
+    @apply text-2xl md:text-3xl font-heading font-bold leading-tight;
+  }
+  
+  .heading-md {
+    @apply text-xl md:text-2xl font-heading font-bold leading-tight;
+  }
 }
 
 /* Custom scrollbar */
@@ -155,7 +140,7 @@
 
 /* Card hover effects */
 .card-hover {
-  @apply transition-all duration-300 hover:shadow-lg hover:translate-y-[-4px];
+  @apply transition-all duration-300 shadow-sm hover:shadow-md hover:translate-y-[-4px];
 }
 
 /* Dark mode transition */

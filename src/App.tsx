@@ -31,7 +31,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <div className="min-h-screen bg-background dark:bg-gradient-to-br dark:from-devscops-purple/90 dark:to-devscops-purple dark-transition">
+        <div className="min-h-screen bg-white dark:bg-gray-900 dark-transition">
           <Toaster />
           <Sonner />
           <BrowserRouter>

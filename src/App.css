@@ -2,7 +2,7 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
 }
 
@@ -43,12 +43,18 @@
 }
 
 /* Modern UI elements */
-.glass-panel {
-  backdrop-filter: blur(16px);
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+.glass-card {
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 .gradient-bg {
@@ -70,15 +76,15 @@
 }
 
 /* Modern hover effects */
-.hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.hover-shadow {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
-.hover-lift:hover {
-  transform: translateY(-5px);
+.hover-shadow:hover {
+  transform: translateY(-3px);
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-/* Dark mode transition */
+/* Smooth transitions */
 *, ::before, ::after {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }

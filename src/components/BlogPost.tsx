@@ -1,10 +1,10 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Clock, BookOpen, User, Calendar, ArrowRight } from "lucide-react";
+import { Clock, ArrowRight, Calendar } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { type BlogPost } from "@/lib/data";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 interface BlogPostCardProps {
   post: BlogPost;
@@ -19,73 +19,71 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({
   className,
   style
 }) => {
-  const categoryColors = {
-    ci: "bg-devscops-teal/10 text-devscops-teal",
-    cd: "bg-devscops-yellow/10 text-devscops-yellow",
-    automation: "bg-devscops-purple/10 text-devscops-purple",
-    culture: "bg-devscops-red/10 text-devscops-red",
-    tools: "bg-devscops-teal/10 text-devscops-teal"
+  const categoryColors: Record<string, string> = {
+    ci: "bg-emerald-100 text-emerald-700",
+    cd: "bg-amber-100 text-amber-700",
+    automation: "bg-purple-100 text-purple-700",
+    culture: "bg-red-100 text-red-700",
+    tools: "bg-blue-100 text-blue-700"
   };
 
   if (featured) {
     return (
       <Card 
         className={cn(
-          "group grid grid-cols-1 md:grid-cols-5 gap-6 overflow-hidden hover:shadow-lg transition-all duration-300 dark:bg-card dark-transition",
+          "overflow-hidden transition-all duration-300 hover:shadow-md card-hover",
           className
         )}
         style={style}
       >
-        <div className="overflow-hidden h-full rounded-l-lg md:col-span-2">
-          <img 
-            src={post.image} 
-            alt={post.title} 
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-        </div>
-        
-        <div className="p-6 flex flex-col md:col-span-3">
-          <div className="mb-4">
-            <div className="flex items-center gap-3 mb-3">
-              <span className={cn("text-xs font-medium px-3 py-1 rounded-full", categoryColors[post.category])}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="aspect-square md:aspect-auto md:h-full overflow-hidden">
+            <img 
+              src={post.image} 
+              alt={post.title} 
+              className="w-full h-full object-cover"
+            />
+          </div>
+          
+          <div className="p-6 flex flex-col">
+            <div className="mb-2">
+              <span className={cn("text-xs font-semibold px-2.5 py-1 rounded-full", categoryColors[post.category])}>
                 {post.category === "ci" ? "CI" : post.category === "cd" ? "CD" : 
                   post.category.charAt(0).toUpperCase() + post.category.slice(1)}
               </span>
-              <span className="text-xs text-muted-foreground flex items-center">
-                <Clock size={14} className="mr-1" />
-                {post.readTime}
-              </span>
             </div>
-            <h2 className="text-2xl font-heading font-semibold mb-3 group-hover:text-devscops-yellow transition-colors">
+            
+            <h2 className="text-2xl font-semibold mb-3">
               {post.title}
             </h2>
-            <p className="text-muted-foreground">
+            
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
               {post.excerpt}
             </p>
-          </div>
-          
-          <div className="mt-auto">
-            <div className="flex items-center justify-between mb-4">
+            
+            <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 mb-4 mt-auto">
+              <Clock size={14} className="mr-1" />
+              <span className="mr-3">{post.readTime}</span>
+              <Calendar size={14} className="mr-1" />
+              <span>{post.date}</span>
+            </div>
+            
+            <div className="flex items-center justify-between mt-2">
               <div className="flex items-center">
                 <img 
                   src={post.author.avatar} 
                   alt={post.author.name} 
-                  className="w-10 h-10 rounded-full mr-3 border-2 border-white shadow-sm"
+                  className="w-8 h-8 rounded-full mr-2"
                 />
-                <div>
-                  <span className="text-sm font-medium block">{post.author.name}</span>
-                  <span className="text-xs text-muted-foreground">{post.date}</span>
-                </div>
+                <span className="text-sm font-medium">{post.author.name}</span>
               </div>
-            </div>
-            
-            <div className="flex justify-end">
+              
               <Link
                 to={`/blog/${post.id}`}
-                className="inline-flex items-center text-sm font-medium px-4 py-2 rounded-lg text-white bg-devscops-teal hover:bg-devscops-teal/90 transition-colors"
+                className="text-devscops-teal hover:text-devscops-teal/80 text-sm font-medium flex items-center"
               >
-                <BookOpen size={16} className="mr-2" />
-                Read article
+                Read more
+                <ArrowRight size={14} className="ml-1" />
               </Link>
             </div>
           </div>
@@ -97,60 +95,54 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({
   return (
     <Card
       className={cn(
-        "group flex flex-col overflow-hidden hover:shadow-md transition-all duration-300 h-full border-t-4 border-t-devscops-yellow dark:bg-card dark-transition",
+        "overflow-hidden transition-all duration-300 hover:shadow-md h-full card-hover",
         className
       )}
       style={style}
     >
-      <div className="relative h-48 overflow-hidden">
+      <div className="aspect-video overflow-hidden">
         <img 
           src={post.image} 
           alt={post.title} 
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover"
         />
-        <div className="absolute top-3 left-3">
-          <span className={cn("text-xs font-medium px-3 py-1 rounded-full", categoryColors[post.category])}>
+      </div>
+      
+      <CardContent className="p-4">
+        <div className="flex items-center justify-between mb-3">
+          <span className={cn("text-xs font-semibold px-2.5 py-1 rounded-full", categoryColors[post.category])}>
             {post.category === "ci" ? "CI" : post.category === "cd" ? "CD" : 
               post.category.charAt(0).toUpperCase() + post.category.slice(1)}
           </span>
-        </div>
-      </div>
-      
-      <CardHeader className="p-5 pb-0">
-        <div className="flex items-center justify-between mb-2 text-xs text-muted-foreground">
-          <div className="flex items-center">
-            <Calendar size={14} className="mr-1" />
-            <span>{post.date}</span>
-          </div>
-          <div className="flex items-center">
-            <Clock size={14} className="mr-1" />
+          
+          <div className="flex items-center text-xs text-gray-600 dark:text-gray-400">
+            <Clock size={12} className="mr-1" />
             <span>{post.readTime}</span>
           </div>
         </div>
-        <h3 className="font-heading font-semibold text-lg group-hover:text-devscops-yellow transition-colors">
+        
+        <h3 className="font-semibold text-lg mb-2 line-clamp-2">
           {post.title}
         </h3>
-      </CardHeader>
-      
-      <CardContent className="p-5 flex-1">
-        <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+        
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
           {post.excerpt}
         </p>
       </CardContent>
       
-      <CardFooter className="p-5 pt-0 flex items-center justify-between border-t mt-auto">
+      <CardFooter className="px-4 pb-4 pt-0 flex items-center justify-between">
         <div className="flex items-center">
           <img 
             src={post.author.avatar} 
             alt={post.author.name} 
-            className="w-8 h-8 rounded-full mr-2 border border-white shadow-sm"
+            className="w-6 h-6 rounded-full mr-2"
           />
           <span className="text-xs font-medium">{post.author.name}</span>
         </div>
         
         <Link
           to={`/blog/${post.id}`}
-          className="inline-flex items-center text-xs font-medium text-devscops-teal hover:underline"
+          className="text-devscops-teal hover:text-devscops-teal/80 text-sm font-medium flex items-center"
         >
           Read more
           <ArrowRight size={14} className="ml-1" />

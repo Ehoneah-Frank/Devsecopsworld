@@ -42,36 +42,91 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        "fixed w-full z-50 transition-all duration-500 ease-in-out py-4 px-6 md:px-12 dark-transition",
+        "fixed w-full z-50 transition-all duration-500 ease-in-out dark-transition",
         scrolled || location.pathname !== "/"
-          ? "bg-white/90 backdrop-blur-md border-b shadow-md dark:bg-devscops-purple/90 dark:border-devscops-purple/20"
+          ? "bg-white/90 shadow-sm backdrop-blur-md border-b dark:bg-gray-900/90 dark:border-gray-800/50"
           : "bg-transparent"
       )}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link
-          to="/"
-          className="flex items-center space-x-2 font-heading font-medium text-2xl tracking-tighter group"
-        >
-          <div className="relative overflow-hidden rounded-xl p-1 transition-all duration-300">
-            <div className="absolute inset-0 bg-gradient-to-r from-devscops-yellow via-devscops-teal to-devscops-purple opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-xl"></div>
-            <img
-              src="/logo.png"
-              alt="DevSecOpsWorld Logo"
-              className="h-12 w-12 relative z-10 transition-transform duration-500 group-hover:scale-110"
-            />
-          </div>
-          <div className="relative overflow-hidden">
-            <span className="dark-transition relative z-10">
-              Devscops
-              <span className="text-devscops-purple dark:text-devscops-yellow font-semibold"></span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <Link
+            to="/"
+            className="flex items-center space-x-2 font-heading font-medium text-xl tracking-tight"
+          >
+            <div className="relative overflow-hidden rounded-full p-1">
+              <img
+                src="/logo.png"
+                alt="DevSecOpsWorld Logo"
+                className="h-8 w-8"
+              />
+            </div>
+            <span className="font-semibold">
+              Devscops<span className="text-devscops-teal">World</span>
             </span>
-            <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-devscops-teal to-devscops-purple scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-          </div>
-        </Link>
+          </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-6">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-6">
+            {navLinks.map((link) => 
+              link.external ? (
+                <a
+                  key={link.path}
+                  href={link.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    "text-sm font-medium hover:text-devscops-teal dark:hover:text-devscops-yellow transition-colors",
+                    location.pathname === link.path
+                      ? "text-devscops-teal dark:text-devscops-yellow"
+                      : "text-gray-700 dark:text-gray-300"
+                  )}
+                >
+                  {link.name}
+                  {link.name === "Docs" && <Github size={16} className="ml-1 inline" />}
+                </a>
+              ) : (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={cn(
+                    "text-sm font-medium hover:text-devscops-teal dark:hover:text-devscops-yellow transition-colors",
+                    location.pathname === link.path
+                      ? "text-devscops-teal dark:text-devscops-yellow"
+                      : "text-gray-700 dark:text-gray-300"
+                  )}
+                >
+                  {link.name}
+                </Link>
+              )
+            )}
+            
+            <DarkModeToggle />
+          </div>
+
+          {/* Mobile Navigation Toggle */}
+          <div className="md:hidden flex items-center space-x-4">
+            <DarkModeToggle />
+            
+            <button
+              onClick={toggleMenu}
+              className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              aria-label={isOpen ? "Close Menu" : "Open Menu"}
+            >
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Navigation Menu */}
+      <div
+        className={cn(
+          "md:hidden bg-white dark:bg-gray-900 shadow-lg border-t dark:border-gray-800 transition-all duration-300 ease-in-out overflow-hidden dark-transition",
+          isOpen ? "max-h-screen py-4" : "max-h-0"
+        )}
+      >
+        <div className="px-4 sm:px-6 lg:px-8 space-y-2">
           {navLinks.map((link) => 
             link.external ? (
               <a
@@ -80,87 +135,27 @@ const Navbar = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  "text-sm transition-all duration-300 hover:text-devscops-teal dark:hover:text-devscops-yellow link-hover font-body flex items-center dark-transition relative overflow-hidden py-1",
+                  "block py-2 px-3 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors",
                   location.pathname === link.path
-                    ? "text-devscops-teal dark:text-devscops-yellow font-medium"
-                    : "text-foreground/80 dark:text-white/80"
+                    ? "text-devscops-teal dark:text-devscops-yellow bg-gray-50 dark:bg-gray-800"
+                    : "text-gray-700 dark:text-gray-300"
                 )}
               >
-                {link.name}
-                {link.name === "Docs" && <Github size={16} className="ml-1" />}
+                <div className="flex items-center justify-between">
+                  {link.name}
+                  {link.name === "Docs" && <Github size={16} />}
+                </div>
               </a>
             ) : (
               <Link
                 key={link.path}
                 to={link.path}
                 className={cn(
-                  "text-sm transition-all duration-300 hover:text-devscops-teal dark:hover:text-devscops-yellow link-hover font-body dark-transition relative overflow-hidden py-1",
+                  "block py-2 px-3 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors",
                   location.pathname === link.path
-                    ? "text-devscops-teal dark:text-devscops-yellow font-medium"
-                    : "text-foreground/80 dark:text-white/80"
+                    ? "text-devscops-teal dark:text-devscops-yellow bg-gray-50 dark:bg-gray-800"
+                    : "text-gray-700 dark:text-gray-300"
                 )}
-              >
-                {link.name}
-              </Link>
-            )
-          )}
-          
-          <DarkModeToggle />
-        </div>
-
-        {/* Mobile Navigation Toggle */}
-        <div className="md:hidden flex items-center space-x-2">
-          <DarkModeToggle />
-          
-          <button
-            onClick={toggleMenu}
-            className="p-2 text-foreground/80 hover:text-devscops-teal dark:text-white/80 dark:hover:text-devscops-yellow transition-all duration-300"
-            aria-label={isOpen ? "Close Menu" : "Open Menu"}
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Navigation Menu */}
-      <div
-        className={cn(
-          "fixed inset-0 z-40 bg-white/95 dark:bg-devscops-purple/95 pt-20 px-6 transition-all duration-500 ease-in-out md:hidden backdrop-blur-md dark-transition",
-          isOpen ? "translate-x-0" : "translate-x-full"
-        )}
-      >
-        <div className="flex flex-col space-y-6">
-          {navLinks.map((link, index) => 
-            link.external ? (
-              <a
-                key={link.path}
-                href={link.path}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  "text-lg py-2 border-b border-muted/50 transition-all duration-300 font-body flex items-center dark-transition",
-                  "animate-fade-in",
-                  location.pathname === link.path
-                    ? "text-devscops-teal dark:text-devscops-yellow font-medium"
-                    : "text-foreground/80 dark:text-white/80"
-                )}
-                style={{ animationDelay: `${index * 50}ms` }}
-              >
-                {link.name}
-                {link.name === "Docs" && <Github size={16} className="ml-2" />}
-              </a>
-            ) : (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={cn(
-                  "text-lg py-2 border-b border-muted/50 transition-all duration-300 font-body dark-transition",
-                  "animate-fade-in",
-                  location.pathname === link.path
-                    ? "text-devscops-teal dark:text-devscops-yellow font-medium"
-                    : "text-foreground/80 dark:text-white/80"
-                )}
-                style={{ animationDelay: `${index * 50}ms` }}
               >
                 {link.name}
               </Link>

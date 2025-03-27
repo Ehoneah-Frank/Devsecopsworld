@@ -21,7 +21,7 @@ const Newsletter = () => {
 
   return (
     <div>
-      <p className="text-sm text-muted-foreground mb-3">
+      <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
         Stay updated with the latest DevOps news, events, and resources.
       </p>
       <form onSubmit={handleSubmit} className="relative">
@@ -31,16 +31,16 @@ const Newsletter = () => {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Your email address"
           required
-          className="w-full py-2 pl-3 pr-10 text-sm bg-background border border-muted rounded-md outline outline-1 outline-black focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+          className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-devscops-teal dark:focus:ring-devscops-yellow transition-all"
         />
         <button
           type="submit"
           disabled={isLoading}
-          className="absolute right-1 top-1 p-1 text-foreground/70 hover:text-primary transition-colors disabled:opacity-50"
+          className="absolute right-2 top-2 p-1 text-gray-500 hover:text-devscops-teal dark:text-gray-400 dark:hover:text-devscops-yellow transition-colors disabled:opacity-50"
           aria-label="Subscribe"
         >
           <SendHorizontal
-            size={18}
+            size={16}
             className={isLoading ? "animate-pulse" : ""}
           />
         </button>
