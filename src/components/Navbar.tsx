@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
+import DarkModeToggle from "./DarkModeToggle";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,9 +42,9 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        "fixed w-full z-50 transition-all duration-300 ease-in-out py-4 px-6 md:px-12",
+        "fixed w-full z-50 transition-all duration-300 ease-in-out py-4 px-6 md:px-12 dark-transition",
         scrolled || location.pathname !== "/"
-          ? "bg-white/90 backdrop-blur-md border-b shadow-sm"
+          ? "bg-white/90 backdrop-blur-md border-b shadow-sm dark:bg-devscops-purple/90 dark:border-devscops-purple/20"
           : "bg-transparent"
       )}
     >
@@ -55,16 +56,16 @@ const Navbar = () => {
           <img
             src="/logo.png"
             alt="DevSecOpsWorld Logo"
-            className="h-12 w-12"
+            className="h-14 w-14"
           />
-          <span>
+          <span className="dark-transition">
             Devscops
-            <span className="text-primary font-semibold"></span>
+            <span className="text-devscops-purple dark:text-devscops-yellow font-semibold"></span>
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => 
             link.external ? (
               <a
@@ -73,10 +74,10 @@ const Navbar = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  "text-sm transition-colors duration-200 hover:text-primary link-hover font-body flex items-center",
+                  "text-sm transition-colors duration-200 hover:text-devscops-teal dark:hover:text-devscops-yellow link-hover font-body flex items-center dark-transition",
                   location.pathname === link.path
-                    ? "text-primary font-medium"
-                    : "text-foreground/80"
+                    ? "text-devscops-teal dark:text-devscops-yellow font-medium"
+                    : "text-foreground/80 dark:text-white/80"
                 )}
               >
                 {link.name}
@@ -87,32 +88,38 @@ const Navbar = () => {
                 key={link.path}
                 to={link.path}
                 className={cn(
-                  "text-sm transition-colors duration-200 hover:text-primary link-hover font-body",
+                  "text-sm transition-colors duration-200 hover:text-devscops-teal dark:hover:text-devscops-yellow link-hover font-body dark-transition",
                   location.pathname === link.path
-                    ? "text-primary font-medium"
-                    : "text-foreground/80"
+                    ? "text-devscops-teal dark:text-devscops-yellow font-medium"
+                    : "text-foreground/80 dark:text-white/80"
                 )}
               >
                 {link.name}
               </Link>
             )
           )}
+          
+          <DarkModeToggle />
         </div>
 
         {/* Mobile Navigation Toggle */}
-        <button
-          onClick={toggleMenu}
-          className="md:hidden p-2 text-foreground/80 hover:text-primary transition-colors"
-          aria-label={isOpen ? "Close Menu" : "Open Menu"}
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="md:hidden flex items-center space-x-2">
+          <DarkModeToggle />
+          
+          <button
+            onClick={toggleMenu}
+            className="p-2 text-foreground/80 hover:text-devscops-teal dark:text-white/80 dark:hover:text-devscops-yellow transition-colors"
+            aria-label={isOpen ? "Close Menu" : "Open Menu"}
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation Menu */}
       <div
         className={cn(
-          "fixed inset-0 z-40 bg-background pt-20 px-6 transition-transform duration-300 ease-in-out md:hidden",
+          "fixed inset-0 z-40 bg-background pt-20 px-6 transition-transform duration-300 ease-in-out md:hidden dark:bg-devscops-purple/95 dark-transition",
           isOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
@@ -125,10 +132,10 @@ const Navbar = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  "text-lg py-2 border-b border-muted transition-colors duration-200 font-body flex items-center",
+                  "text-lg py-2 border-b border-muted transition-colors duration-200 font-body flex items-center dark-transition",
                   location.pathname === link.path
-                    ? "text-primary font-medium"
-                    : "text-foreground/80"
+                    ? "text-devscops-teal dark:text-devscops-yellow font-medium"
+                    : "text-foreground/80 dark:text-white/80"
                 )}
               >
                 {link.name}
@@ -139,10 +146,10 @@ const Navbar = () => {
                 key={link.path}
                 to={link.path}
                 className={cn(
-                  "text-lg py-2 border-b border-muted transition-colors duration-200 font-body",
+                  "text-lg py-2 border-b border-muted transition-colors duration-200 font-body dark-transition",
                   location.pathname === link.path
-                    ? "text-primary font-medium"
-                    : "text-foreground/80"
+                    ? "text-devscops-teal dark:text-devscops-yellow font-medium"
+                    : "text-foreground/80 dark:text-white/80"
                 )}
               >
                 {link.name}

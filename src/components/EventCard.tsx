@@ -14,15 +14,15 @@ interface EventCardProps {
 
 const EventCard: React.FC<EventCardProps> = ({ event, className, style }) => {
   const categoryColors = {
-    webinar: "bg-blue-100 text-blue-700 border border-blue-300",
-    workshop: "bg-green-100 text-green-700 border border-green-300",
-    conference: "bg-purple-100 text-purple-700 border border-purple-300"
+    webinar: "bg-devscops-teal/10 text-devscops-teal border border-devscops-teal/30",
+    workshop: "bg-devscops-yellow/10 text-devscops-yellow border border-devscops-yellow/30",
+    conference: "bg-devscops-purple/10 text-devscops-purple border border-devscops-purple/30"
   };
 
   return (
     <Card 
       className={cn(
-        "group overflow-hidden transition-all duration-300 hover:shadow-lg border-l-4 border-l-primary",
+        "group overflow-hidden transition-all duration-300 hover:shadow-lg border-l-4 border-l-devscops-purple dark:bg-card dark-transition",
         className
       )}
       style={style}
@@ -50,25 +50,25 @@ const EventCard: React.FC<EventCardProps> = ({ event, className, style }) => {
       </div>
       
       <CardHeader className="p-4 pb-0">
-        <h3 className="font-heading font-semibold text-xl group-hover:text-primary transition-colors">
+        <h3 className="font-heading font-semibold text-xl group-hover:text-devscops-yellow transition-colors">
           {event.title}
         </h3>
       </CardHeader>
       
       <CardContent className="p-4 space-y-3">
-        <div className="flex flex-col space-y-2 border-l-2 border-primary/20 pl-3">
+        <div className="flex flex-col space-y-2 border-l-2 border-devscops-purple/20 pl-3">
           <div className="flex items-center text-sm">
-            <Calendar size={16} className="mr-2 text-primary" />
+            <Calendar size={16} className="mr-2 text-devscops-teal" />
             <span className="font-medium">{event.date}</span>
           </div>
           
           <div className="flex items-center text-sm">
-            <Clock size={16} className="mr-2 text-primary" />
+            <Clock size={16} className="mr-2 text-devscops-teal" />
             <span>{event.time}</span>
           </div>
           
           <div className="flex items-center text-sm">
-            <MapPin size={16} className="mr-2 text-primary" />
+            <MapPin size={16} className="mr-2 text-devscops-teal" />
             <span>{event.location}</span>
           </div>
         </div>
@@ -81,7 +81,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, className, style }) => {
       <CardFooter className="p-4 pt-0">
         <Link
           to={`/events/${event.id}`}
-          className="w-full inline-flex items-center justify-center bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-md p-2 text-sm font-medium transition-colors"
+          className="w-full inline-flex items-center justify-center bg-devscops-red hover:bg-devscops-red/90 text-white rounded-md p-2 text-sm font-medium transition-colors"
         >
           Register Now
           <ChevronRight size={16} className="ml-1" />

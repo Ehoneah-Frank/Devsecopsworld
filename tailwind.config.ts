@@ -62,6 +62,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Custom color palette
+				devscops: {
+					yellow: '#F8BE32',
+					red: '#DB514C',
+					teal: '#10979D',
+					purple: '#563E81'
 				}
 			},
 			borderRadius: {

@@ -6,34 +6,64 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    --foreground: 277 43% 37%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    --card-foreground: 277 43% 37%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --popover-foreground: 277 43% 37%;
 
-    --primary: 0 0% 0%;
+    --primary: 277 43% 37%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 0%;
+    --secondary: 185 80% 34%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
+    --muted: 42 93% 59%;
+    --muted-foreground: 277 43% 37%;
 
-    --accent: 0 0% 0%;
+    --accent: 0 54% 58%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 54% 58%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 89.8%;
+    --border: 42 93% 85%;
     --input: 0 0% 89.8%;
-    --ring: 0 0% 0%;
+    --ring: 277 43% 37%;
 
     --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 277 43% 15%;
+    --foreground: 0 0% 98%;
+
+    --card: 277 43% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 277 43% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 42 93% 59%;
+    --primary-foreground: 277 43% 37%;
+
+    --secondary: 185 80% 34%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 277 43% 20%;
+    --muted-foreground: 0 0% 80%;
+
+    --accent: 0 54% 58%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 277 43% 25%;
+    --input: 277 43% 25%;
+    --ring: 42 93% 59%;
   }
 
   * {
@@ -101,4 +131,9 @@
 }
 .link-hover:hover::after {
   @apply scale-x-100 origin-bottom-left;
+}
+
+/* Dark mode transition */
+.dark-transition {
+  @apply transition-colors duration-300;
 }
