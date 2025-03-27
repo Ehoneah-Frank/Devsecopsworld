@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { Github, Twitter, Linkedin, Mail } from "lucide-react";
@@ -11,11 +12,16 @@ const Footer = () => {
           
           {/* Branding & Socials */}
           <div>
-            <Link to="/" className="text-2xl font-bold tracking-tight text-gray-900">
-            Devsecopsworld<span className="text-primary">-community</span>
+            <Link to="/" className="text-2xl font-bold tracking-tight text-gray-900 flex items-center">
+              <img 
+                src="/logo.png" 
+                alt="Devscops Logo" 
+                className="h-10 w-10 mr-2"
+              />
+              Devscops
             </Link>
             <p className="mt-4 text-sm">
-              Bridging Development and Operations for Seamless Delivery.
+              Promoting Ghana's tech excellence through DevOps best practices and community-driven innovation.
             </p>
             <div className="flex space-x-4 mt-6">
               <a 
@@ -28,7 +34,7 @@ const Footer = () => {
                 <Twitter size={20} />
               </a>
               <a 
-                href="https://github.com" 
+                href="https://github.com/devsecopsworld" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 aria-label="GitHub"
@@ -92,6 +98,17 @@ const Footer = () => {
                   Contact
                 </Link>
               </li>
+              <li>
+                <a 
+                  href="https://github.com/devsecopsworld" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary transition-colors text-sm flex items-center"
+                >
+                  Docs
+                  <Github size={14} className="ml-1" />
+                </a>
+              </li>
             </ul>
           </div>
           
@@ -101,11 +118,11 @@ const Footer = () => {
             <Newsletter />
             <div className="mt-6">
               <a 
-                href="mailto:info@devopshub.com" 
+                href="mailto:info@devscops.com" 
                 className="flex items-center space-x-2 text-sm hover:text-primary transition-colors"
               >
                 <Mail size={18} />
-                <span>lorem@gmail.com</span>
+                <span>info@devscops.com</span>
               </a>
             </div>
           </div>
@@ -114,7 +131,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-200 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-xs">
-            &copy; {new Date().getFullYear()} Devsecopsworld-community. All rights reserved.
+            &copy; {new Date().getFullYear()} Devscops. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link 
